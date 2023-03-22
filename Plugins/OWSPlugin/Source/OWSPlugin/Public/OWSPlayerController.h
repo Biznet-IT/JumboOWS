@@ -11,10 +11,6 @@
 #include "OWSPlayerControllerComponent.h"
 #include "OWSPlayerController.generated.h"
 
-
-
-
-
 USTRUCT(BlueprintType, Blueprintable)
 struct FChatGroup
 {

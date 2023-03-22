@@ -10,6 +10,7 @@
 #include "Runtime/Engine/Classes/GameFramework/PlayerState.h"
 #include "Runtime/Core/Public/Misc/ConfigCacheIni.h"
 #include "Runtime/Engine/Classes/Components/StaticMeshComponent.h"
+#include <Net/UnrealNetwork.h>
 //#include "Runtime/HeadMountedDisplay/Public/IXRTrackingSystem.h"
 
 
