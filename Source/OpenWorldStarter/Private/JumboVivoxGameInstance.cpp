@@ -13,21 +13,14 @@ void UJumboVivoxGameInstance::Init()
 {
 	Super::Init();
 
-	if (GetWorld()->GetNetMode() == NM_Client)
-	{
-		InitVivox();
-	}
+	InitVivox();
 }
 
 void UJumboVivoxGameInstance::Shutdown()
 {
 	Super::Shutdown();
 
-	if (GetWorld()->GetNetMode() == NM_Client)
-	{
-		VivoxVoiceClient->Uninitialize();
-	}
-
+	VivoxVoiceClient->Uninitialize();
 }
 
 void UJumboVivoxGameInstance::InitVivox()
@@ -71,8 +64,8 @@ void UJumboVivoxGameInstance::JoinChannel()
 {
 	ILoginSession& MyLoginSession = VivoxVoiceClient->GetLoginSession(LoggedInUserId);
 	// Para conectar dos usuarios a un canal se puede setear dinámicamente el ChannelId
-	MyChannelId = ChannelId(VIVOX_VOICE_ISSUER, "ChannelId", VIVOX_VOICE_DOMAIN, ChannelType::Echo);
-	IChannelSession& ChannelSession = MyLoginSession.GetChannelSession(MyChannelId);
+	ChannelId Channel = ChannelId(VIVOX_VOICE_ISSUER, "ChannelId", VIVOX_VOICE_DOMAIN, ChannelType::Echo);
+	IChannelSession& ChannelSession = MyLoginSession.GetChannelSession(Channel);
 
 	FTimespan TokenExpiration = FTimespan::FromSeconds(90);
 	FString JoinToken = ChannelSession.GetConnectToken(VIVOX_VOICE_KEY, TokenExpiration);
@@ -98,8 +91,9 @@ void UJumboVivoxGameInstance::Logout()
 {
 	ILoginSession& MyLoginSession = VivoxVoiceClient->GetLoginSession(LoggedInUserId);
 
-	MyLoginSession.GetChannelSession(MyChannelId).Disconnect();
-	MyLoginSession.DeleteChannelSession(MyChannelId);
+	MyLoginSession.Logout();
+
+	
 
 	if (GEngine)
 	{

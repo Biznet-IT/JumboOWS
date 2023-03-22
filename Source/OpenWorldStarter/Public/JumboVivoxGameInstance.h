@@ -29,7 +29,5 @@ class OPENWORLDSTARTER_API UJumboVivoxGameInstance : public UOWSGameInstance
 
 	IClient* VivoxVoiceClient;
 	AccountId LoggedInUserId;
-
-	ChannelId MyChannelId;
 	
 };
