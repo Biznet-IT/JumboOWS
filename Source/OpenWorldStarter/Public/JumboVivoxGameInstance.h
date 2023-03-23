@@ -23,11 +23,11 @@ class OPENWORLDSTARTER_API UJumboVivoxGameInstance : public UOWSGameInstance
 	void JoinChannel();
 
 	UFUNCTION(BlueprintCallable)
-	void Login(int RandomNumber);
+	void Login();
 	UFUNCTION(BlueprintCallable)
 	void Logout();
 
 	IClient* VivoxVoiceClient;
 	AccountId LoggedInUserId;
-	
+	ChannelId MyChannelId;
 };

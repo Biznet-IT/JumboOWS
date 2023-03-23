@@ -12,7 +12,6 @@
 void UJumboVivoxGameInstance::Init()
 {
 	Super::Init();
-
 	InitVivox();
 }
 
@@ -21,23 +20,28 @@ void UJumboVivoxGameInstance::Shutdown()
 	Super::Shutdown();
 
 	VivoxVoiceClient->Uninitialize();
+	
 }
 
 void UJumboVivoxGameInstance::InitVivox()
 {
-	VivoxVoiceClient = &static_cast<FVivoxCoreModule*>(&FModuleManager::Get().LoadModuleChecked(TEXT("VivoxCore")))->VoiceClient();
 
-	VivoxVoiceClient->Initialize();
+		VivoxVoiceClient = &static_cast<FVivoxCoreModule*>(&FModuleManager::Get().LoadModuleChecked(TEXT("VivoxCore")))->VoiceClient();
 
-	// Puedo hacer cualquier cosa antes del login, tal como obtener credenciales del usuario desde el backend
-	int RandomNumber = UKismetMathLibrary::RandomIntegerInRange(0, 500);
+		if (GetWorld()->GetNetMode() == NM_Client)
+		{
+			VivoxVoiceClient->Initialize();
 
-	Login(RandomNumber);
+
+			Login();
+		}
+
 }
 
-void UJumboVivoxGameInstance::Login(int RandomNumber)
+void UJumboVivoxGameInstance::Login()
 {
-	
+	// Puedo hacer cualquier cosa antes del login, tal como obtener credenciales del usuario desde el backend
+	int RandomNumber = UKismetMathLibrary::RandomIntegerInRange(0, 500);
 	// Obs: El player id debería ser el playerId que asigna OWS
 	LoggedInUserId = AccountId(VIVOX_VOICE_ISSUER, FString::FromInt(RandomNumber), VIVOX_VOICE_DOMAIN);
 	ILoginSession& MyLoginSession(VivoxVoiceClient->GetLoginSession(LoggedInUserId));
@@ -64,8 +68,8 @@ void UJumboVivoxGameInstance::JoinChannel()
 {
 	ILoginSession& MyLoginSession = VivoxVoiceClient->GetLoginSession(LoggedInUserId);
 	// Para conectar dos usuarios a un canal se puede setear dinámicamente el ChannelId
-	ChannelId Channel = ChannelId(VIVOX_VOICE_ISSUER, "ChannelId", VIVOX_VOICE_DOMAIN, ChannelType::Echo);
-	IChannelSession& ChannelSession = MyLoginSession.GetChannelSession(Channel);
+	MyChannelId = ChannelId(VIVOX_VOICE_ISSUER, "ChannelId", VIVOX_VOICE_DOMAIN, ChannelType::Echo);
+	IChannelSession& ChannelSession = MyLoginSession.GetChannelSession(MyChannelId);
 
 	FTimespan TokenExpiration = FTimespan::FromSeconds(90);
 	FString JoinToken = ChannelSession.GetConnectToken(VIVOX_VOICE_KEY, TokenExpiration);
@@ -91,9 +95,10 @@ void UJumboVivoxGameInstance::Logout()
 {
 	ILoginSession& MyLoginSession = VivoxVoiceClient->GetLoginSession(LoggedInUserId);
 
-	MyLoginSession.Logout();
-
+	MyLoginSession.GetChannelSession(MyChannelId).Disconnect();
 	
+	MyLoginSession.DeleteChannelSession(MyChannelId);
+	MyLoginSession.Logout();
 
 	if (GEngine)
 	{
