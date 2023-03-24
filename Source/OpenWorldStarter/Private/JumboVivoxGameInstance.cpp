@@ -31,9 +31,6 @@ void UJumboVivoxGameInstance::InitVivox()
 		if (GetWorld()->GetNetMode() == NM_Client)
 		{
 			VivoxVoiceClient->Initialize();
-
-
-			Login();
 		}
 
 }
