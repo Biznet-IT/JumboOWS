@@ -27,6 +27,12 @@ class OPENWORLDSTARTER_API UJumboVivoxGameInstance : public UOWSGameInstance
 	UFUNCTION(BlueprintCallable)
 	void Logout();
 
+	UFUNCTION(BlueprintCallable, Category = "Vivox")
+	void JoinVoiceChannel(const FString& ChannelName);
+
+	UFUNCTION(BlueprintCallable, Category = "Vivox")
+	void LeaveVoiceChannel();
+
 	IClient* VivoxVoiceClient;
 	AccountId LoggedInUserId;
 	ChannelId MyChannelId;

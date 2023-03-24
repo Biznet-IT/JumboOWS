@@ -3,6 +3,9 @@
 
 #include "JumboVivoxGameInstance.h"
 #include <Kismet/KismetMathLibrary.h>
+#include "VivoxCore.h"
+#include "VivoxCoreCommon.h"
+#include <VivoxCore/Private/ChannelSession.h>
 
 #define VIVOX_VOICE_SERVER TEXT("https://unity.vivox.com/appconfig/46736-jumbo-25100-udash")
 #define VIVOX_VOICE_DOMAIN TEXT("mtu1xp.vivox.com")
@@ -35,10 +38,50 @@ void UJumboVivoxGameInstance::InitVivox()
 
 }
 
+// JumboVivoxGameInstance.cpp
+void UJumboVivoxGameInstance::JoinVoiceChannel(const FString& ChannelName)
+{
+	ILoginSession& MyLoginSession = VivoxVoiceClient->GetLoginSession(LoggedInUserId);
+	MyChannelId = ChannelId(VIVOX_VOICE_ISSUER, ChannelName, VIVOX_VOICE_DOMAIN, ChannelType::NonPositional);
+	IChannelSession& ChannelSession = MyLoginSession.GetChannelSession(MyChannelId);
+
+	FTimespan TokenExpiration = FTimespan::FromSeconds(90);
+	FString JoinToken = ChannelSession.GetConnectToken(VIVOX_VOICE_KEY, TokenExpiration);
+
+	IChannelSession::FOnBeginConnectCompletedDelegate OnBeginChannelCompleted;
+
+	OnBeginChannelCompleted.BindLambda([this, &MyLoginSession](VivoxCoreError Error)
+		{
+			if (GEngine)
+			{
+				GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Green, TEXT("Entraste al canal! :)"));
+			}
+
+			UE_LOG(LogTemp, Log, TEXT("Entraste al canal! :)"));
+		});
+
+	ChannelSession.BeginConnect(true, false, true, JoinToken, OnBeginChannelCompleted);
+}
+
+void UJumboVivoxGameInstance::LeaveVoiceChannel()
+{
+	ILoginSession& MyLoginSession = VivoxVoiceClient->GetLoginSession(LoggedInUserId);
+
+	MyLoginSession.GetChannelSession(MyChannelId).Disconnect();
+	MyLoginSession.DeleteChannelSession(MyChannelId);
+
+	if (GEngine)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Green, TEXT("Saliste del canal"));
+	}
+}
+
 void UJumboVivoxGameInstance::Login()
 {
 	// Puedo hacer cualquier cosa antes del login, tal como obtener credenciales del usuario desde el backend
 	int RandomNumber = UKismetMathLibrary::RandomIntegerInRange(0, 500);
+
+
 	// Obs: El player id debería ser el playerId que asigna OWS
 	LoggedInUserId = AccountId(VIVOX_VOICE_ISSUER, FString::FromInt(RandomNumber), VIVOX_VOICE_DOMAIN);
 	ILoginSession& MyLoginSession(VivoxVoiceClient->GetLoginSession(LoggedInUserId));
