@@ -16,7 +16,7 @@ public class OpenWorldStarter : ModuleRules
             "Json",
             "JsonUtilities" });
 
-		PrivateDependencyModuleNames.AddRange(new string[] { "VivoxCore" });
+		PrivateDependencyModuleNames.AddRange(new string[] { "VivoxCore", "InoVivox" });
 
         PublicIncludePathModuleNames.AddRange(new string[] { "OWSPlugin" });
 
