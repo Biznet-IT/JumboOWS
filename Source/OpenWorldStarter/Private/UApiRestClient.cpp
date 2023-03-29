@@ -1,3 +1,4 @@
+/*
 #include "UApiRestClient.h"
 #include "HttpModule.h"
 #include "Interfaces/IHttpRequest.h"
@@ -68,3 +69,4 @@ void UUApiRestClient::OnHttpRequestCompleted(FHttpRequestPtr Request, FHttpRespo
         OnDeleteResponse.Broadcast(ResponseString, bWasSuccessful);
     }
 }
+*/

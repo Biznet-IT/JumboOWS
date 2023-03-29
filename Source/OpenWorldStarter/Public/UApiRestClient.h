@@ -1,3 +1,4 @@
+/*
 #pragma once
 
 #include "CoreMinimal.h"
@@ -51,3 +52,4 @@ public:
 private:
     void OnHttpRequestCompleted(FHttpRequestPtr Request, FHttpResponsePtr Response, bool bWasSuccessful);
 };
+*/
