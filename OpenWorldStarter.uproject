@@ -1,6 +1,6 @@
 {
 	"FileVersion": 3,
-	"EngineAssociation": "{10480986-46E2-FBF0-5886-53BFCB8DEE95}",
+	"EngineAssociation": "5.1",
 	"Category": "",
 	"Description": "",
 	"Modules": [
@@ -73,6 +73,11 @@
 			"Name": "LowEntryExtStdLib",
 			"Enabled": false,
 			"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/content/846c2ad08f164f45b0335ecebf85361e"
+		},
+		{
+			"Name": "HTTPRequestForBlueprints",
+			"Enabled": true,
+			"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/product/4a9830d1cea14a28bae31127f41a210b"
 		}
 	],
 	"TargetPlatforms": [
