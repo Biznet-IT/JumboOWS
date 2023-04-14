@@ -19,5 +19,6 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Download")
 	static void DownloadAssetFile(const FString& URL, const FString& SavePath);
 
-	
+	UFUNCTION(BlueprintCallable, Category = "File IO")
+	static bool DeleteDirectoryContent(const FString& DirectoryPath);
 };
