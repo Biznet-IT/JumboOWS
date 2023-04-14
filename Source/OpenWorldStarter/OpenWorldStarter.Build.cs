@@ -14,6 +14,7 @@ public class OpenWorldStarter : ModuleRules
             "OWSPlugin",
             "AIModule",
             "Json",
+            "Http",
             "JsonUtilities" });
 
 		PrivateDependencyModuleNames.AddRange(new string[] { "VivoxCore", "InoVivox" });
