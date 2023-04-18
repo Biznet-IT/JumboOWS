@@ -20,5 +20,8 @@ public:
 	static void DownloadAssetFile(const FString& URL, const FString& SavePath);
 
 	UFUNCTION(BlueprintCallable, Category = "File IO")
+	static TArray<FAssetData*> GetAssetsInFolder(const FString& FolderPath);
+
+	UFUNCTION(BlueprintCallable, Category = "File IO")
 	static bool DeleteDirectoryContent(const FString& DirectoryPath);
 };

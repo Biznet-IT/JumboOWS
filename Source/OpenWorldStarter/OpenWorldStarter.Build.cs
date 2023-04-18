@@ -14,6 +14,7 @@ public class OpenWorldStarter : ModuleRules
             "OWSPlugin",
             "AIModule",
             "Json",
+            "AssetRegistry",
             "Http",
             "JsonUtilities" });
 

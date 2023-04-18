@@ -17,8 +17,6 @@ class OPENWORLDSTARTER_API UHttpDownloadAsset : public UObject
 {
 	GENERATED_BODY()
 
-	
-
 public:
 	UFUNCTION(BlueprintCallable, Category = "Download")
 	void DownloadAssetFile(const FString& URL, const FString& SavePath);
