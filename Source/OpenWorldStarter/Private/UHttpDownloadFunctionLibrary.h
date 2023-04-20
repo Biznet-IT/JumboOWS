@@ -17,10 +17,10 @@ class UUHttpDownloadFunctionLibrary : public UBlueprintFunctionLibrary
 
 public:
 	UFUNCTION(BlueprintCallable, Category = "Download")
-	static void DownloadAssetFile(const FString& URL, const FString& SavePath);
+	static void DownloadAssetFile(const FString& URL);
 
 	UFUNCTION(BlueprintCallable, Category = "File IO")
-	static TArray<FAssetData*> GetAssetsInFolder(const FString& FolderPath);
+	static TArray<FAssetData> GetAssetsInFolder(const FString& FolderPath);
 
 	UFUNCTION(BlueprintCallable, Category = "File IO")
 	static bool DeleteDirectoryContent(const FString& DirectoryPath);

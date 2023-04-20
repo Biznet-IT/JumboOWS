@@ -8,13 +8,13 @@
 /*
 */
 
-void UUHttpDownloadFunctionLibrary::DownloadAssetFile(const FString& URL, const FString& SavePath)
+void UUHttpDownloadFunctionLibrary::DownloadAssetFile(const FString& URL)
 {
     UHttpDownloadAsset* HttpDownloadAsset = NewObject<UHttpDownloadAsset>();
 
     if (HttpDownloadAsset != nullptr)
     {
-        HttpDownloadAsset->DownloadAssetFile(URL, SavePath);
+        HttpDownloadAsset->DownloadAssetFile(URL);
     }
     else
     {

@@ -7,14 +7,15 @@
 #include "Interfaces/IHttpResponse.h"
 #include "HttpModule.h"
 
-void UHttpDownloadAsset::DownloadAssetFile(const FString& URL, const FString& SavePath)
+void UHttpDownloadAsset::DownloadAssetFile(const FString& URL)
 {
+    FString Path = "D:\\Biznet\\Documents\\GitHub\\JumboOWS\\Biznet\\JumboOWS\\Content\\Actors\\ShapeActor\\";
     TSharedRef<IHttpRequest, ESPMode::ThreadSafe> HttpRequest = FHttpModule::Get().CreateRequest();
     HttpRequest->SetURL(URL);
     HttpRequest->SetVerb("GET");
     HttpRequest->OnProcessRequestComplete().BindUObject(this, &UHttpDownloadAsset::OnDownloadCompleted);
     HttpRequest->SetHeader("Content-Type", "application/octet-stream");
-    FileSavePath = SavePath;
+    FileSavePath = Path;
     HttpRequest->ProcessRequest();
 }
 
@@ -54,6 +55,8 @@ void UHttpDownloadAsset::OnDownloadCompleted(FHttpRequestPtr Request, FHttpRespo
     }
     else
     {
-        UE_LOG(LogTemp, Error, TEXT("Error al descargar el archivo"));
+        int32 ResponseCode = Response.IsValid() ? Response->GetResponseCode() : -1;
+        FString ResponseError = Response.IsValid() ? Response->GetErrorSummary().ToString() : TEXT("La respuesta no es válida");
+        UE_LOG(LogTemp, Error, TEXT("Error al descargar el archivo. Código de respuesta: %d, Error: %s"), ResponseCode, *ResponseError);
     }
 }
