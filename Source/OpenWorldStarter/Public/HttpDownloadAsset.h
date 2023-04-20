@@ -19,12 +19,14 @@ class OPENWORLDSTARTER_API UHttpDownloadAsset : public UObject
 
 public:
 	UFUNCTION(BlueprintCallable, Category = "Download")
-	void DownloadAssetFile(const FString& URL);
+	void DownloadAssetFile(const FString& URL, const FString& AssetName);
 
 private:
 	void OnDownloadCompleted(FHttpRequestPtr Request, FHttpResponsePtr Response, bool bWasSuccessful);
 
 	FString FileSavePath; // Agrega esta línea para definir FileSavePath
+
+	FString AssetNameToStore;
 
 	
 };

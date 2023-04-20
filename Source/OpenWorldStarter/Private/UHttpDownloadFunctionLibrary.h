@@ -17,7 +17,7 @@ class UUHttpDownloadFunctionLibrary : public UBlueprintFunctionLibrary
 
 public:
 	UFUNCTION(BlueprintCallable, Category = "Download")
-	static void DownloadAssetFile(const FString& URL);
+	static void DownloadAssetFile(const FString& URL, const FString& AssetName);
 
 	UFUNCTION(BlueprintCallable, Category = "File IO")
 	static TArray<FAssetData> GetAssetsInFolder(const FString& FolderPath);
