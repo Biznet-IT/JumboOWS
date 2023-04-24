@@ -58,10 +58,6 @@ TArray<FAssetData> UUHttpDownloadFunctionLibrary::GetAssetsInFolder(const FStrin
     return AssetDataList;
 }
 
-
-
-
-
 bool UUHttpDownloadFunctionLibrary::DeleteDirectoryContent(const FString& DirectoryPath)
 {
     FString D_Path = DirectoryPath;
