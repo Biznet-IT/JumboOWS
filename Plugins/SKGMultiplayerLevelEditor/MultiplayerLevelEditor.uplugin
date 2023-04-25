@@ -1,0 +1,42 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.3",
+	"FriendlyName": "Runtime Multiplayer Level Editor",
+	"Description": "Runtime Multiplayer Level Editor",
+	"Category": "SKG Plugins",
+	"CreatedBy": "Sneaky Kitty Game Dev",
+	"CreatedByURL": "https://www.youtube.com/channel/UCYcDJPGvIUFxBTmXOZWFswQ",
+	"DocsURL": "https://www.youtube.com/playlist?list=PLnHeglBaPYu_c8-7uKeWrvy9SBcH2Ucv9",
+	"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/product/9d2ba67bc3eb4510aa1a0d2cfdf98b30",
+	"SupportURL": "https://discord.gg/W5g6pZXfjh",
+	"EngineVersion": "5.1.0",
+	"CanContainContent": true,
+	"Installed": true,
+	"Modules": [
+		{
+			"Name": "SKGMultiplayerLevelEditor",
+			"Type": "Runtime",
+			"LoadingPhase": "Default",
+			"PlatformAllowList": [
+				"Win64"
+			]
+		},
+		{
+			"Name": "SKGDirectionalLight",
+			"Type": "Runtime",
+			"LoadingPhase": "Default",
+			"PlatformAllowList": [
+				"Win64"
+			]
+		},
+		{
+			"Name": "SKGGizmo",
+			"Type": "Runtime",
+			"LoadingPhase": "Default",
+			"PlatformAllowList": [
+				"Win64"
+			]
+		}
+	]
+}
