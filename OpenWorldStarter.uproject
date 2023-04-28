@@ -80,13 +80,13 @@
 			"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/product/4a9830d1cea14a28bae31127f41a210b"
 		},
 		{
-			"Name": "JsonBlueprintUtilities",
-			"Enabled": true
-		},
-		{
 			"Name": "MultiplayerLevelEditor",
 			"Enabled": true,
 			"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/product/9d2ba67bc3eb4510aa1a0d2cfdf98b30"
+		},
+		{
+			"Name": "JsonBlueprintUtilities",
+			"Enabled": true
 		}
 	],
 	"TargetPlatforms": [
