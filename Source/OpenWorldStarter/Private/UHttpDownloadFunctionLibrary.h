@@ -3,6 +3,11 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "HttpModule.h"
+#include "Interfaces/IHttpRequest.h"
+#include "Interfaces/IHttpResponse.h"
+#include "Serialization/JsonReader.h"
+#include "Serialization/JsonSerializer.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "HttpDownloadAsset.h"
 #include "UHttpDownloadFunctionLibrary.generated.h"
@@ -24,4 +29,8 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "File IO")
 	static bool DeleteDirectoryContent(const FString& DirectoryPath);
+
+	UFUNCTION(BlueprintCallable, Category = "Http Request")
+	static void GenerarVentaPostRequest(const TArray<FString>& StringArray, int Total, const FString& UserGUID, const FString& URL);
+	
 };
