@@ -128,7 +128,7 @@ void UUHttpDownloadFunctionLibrary::GenerarVentaPostRequest(const TArray<FString
             if (ConnectedSuccessfully && Res.IsValid())
             {
                 FString ResponseString = Res->GetContentAsString();
-                UE_LOG(LogTemp, Log, TEXT("Response: %s"), *ResponseString);
+                UE_LOG(LogTemp, Log, TEXT("Response: %s"), *ResponseString)
             }
             else
             {
