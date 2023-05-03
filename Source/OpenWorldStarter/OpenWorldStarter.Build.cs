@@ -15,7 +15,7 @@ public class OpenWorldStarter : ModuleRules
             "AIModule",
             "Json",
             "AssetRegistry",
-            "Http",
+            "HTTP",
             "JsonUtilities" });
 
 		PrivateDependencyModuleNames.AddRange(new string[] { "VivoxCore", "InoVivox" });

@@ -106,20 +106,14 @@ void UUHttpDownloadFunctionLibrary::GenerarVentaPostRequest(const TArray<FString
     {
         JsonStringArray.Add(MakeShareable(new FJsonValueString(String)));
     }
-    JsonObject->SetArrayField(TEXT("arr_productos"), JsonStringArray);
+    JsonObject->SetArrayField(TEXT("arr_strings"), JsonStringArray);
     JsonObject->SetNumberField(TEXT("total"), Total);
-    JsonObject->SetStringField(TEXT("id_usuario"), UserGUID);
+    JsonObject->SetStringField(TEXT("id_user"), UserGUID);
 
     // Convertir el objeto JSON a un FString
     FString JsonString;
     TSharedRef<TJsonWriter<>> JsonWriter = TJsonWriterFactory<>::Create(&JsonString);
     FJsonSerializer::Serialize(JsonObject.ToSharedRef(), JsonWriter);
-
-    // Establecer el cuerpo de la solicitud
-    Request->SetContentAsString(JsonString);
-
-    // Imprimir el objeto JSON serializado en el registro
-    UE_LOG(LogTemp, Log, TEXT("JSON enviado: %s"), *JsonString);
 
     // Configurar la función de delegado para manejar la respuesta usando una expresión lambda
     Request->OnProcessRequestComplete().BindLambda(
