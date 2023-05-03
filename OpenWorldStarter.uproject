@@ -87,6 +87,11 @@
 		{
 			"Name": "JsonBlueprintUtilities",
 			"Enabled": true
+		},
+		{
+			"Name": "DTLoadTexture",
+			"Enabled": true,
+			"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/product/f491fbb274af497e89a45b9893296321"
 		}
 	],
 	"TargetPlatforms": [
