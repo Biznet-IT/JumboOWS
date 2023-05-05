@@ -10,9 +10,6 @@
 #include "AssetRegistryModule.h"
 #include "AssetData.h"
 
-/*
-*/
-
 void UUHttpDownloadFunctionLibrary::DownloadAssetFile(const FString& URL, const FString& AssetName)
 {
     UHttpDownloadAsset* HttpDownloadAsset = NewObject<UHttpDownloadAsset>();
